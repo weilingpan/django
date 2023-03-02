@@ -1,4 +1,7 @@
 from django.shortcuts import render
+import json
+import os
+from pydub import AudioSegment
 
 # Create your views here.
 from django.conf import settings
@@ -25,13 +28,34 @@ def callback(request):
             return HttpResponseForbidden()
         except LineBotApiError:
             return HttpResponseBadRequest()
- 
+
         for event in events:
-            if isinstance(event, MessageEvent):
-                line_bot_api.reply_message(
-                    event.reply_token,
-                    TextSendMessage(text=event.message.text)
-                )
+            print(f'message info: {event}')
+            event_type = event.message.type
+            if event_type == 'text':
+                if isinstance(event, MessageEvent):
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text=event.message.text)
+                    )
+            elif event_type == 'audio':
+                # Get the audio and save it to a file
+                content = request.body
+                filename = f'{event.message.id}'
+                filepath = os.path.join(filename+'.wav')
+                with open(filepath, 'wb') as f:
+                    f.write(content)
+                
+
+                # audio = AudioSegment.from_file(f'{filename}.m4a', format="m4a")
+                # audio.export(filename+'.wav', format="wav")
+
+                if isinstance(event, MessageEvent):
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        TextSendMessage(text='我正在學習如何接收audio訊息')
+                    )
+
         return HttpResponse()
     else:
         return HttpResponseBadRequest()
