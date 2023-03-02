@@ -22,6 +22,7 @@
 
 - python packages:
     - speech recognition
+    - conda install ffmepg
     - pydub (用來將 mp3 轉成 wav，因 python speech recognition 目前只支援 wav 格式)
     - 補充: mp3 轉 wav 方法
         1) subprocess (內建的package) 
