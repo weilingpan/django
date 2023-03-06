@@ -137,7 +137,9 @@
     'https://xxxx.ngrok.io/callback/'
 
 
-## 實作2 - 建立 speech recognition bot
+## 實作2 - 搭配 OpenAI 服務，建立 GPT3.5 聊天機器人
+
+## 實作3 - 建立 speech recognition bot
 
 <br>
 
