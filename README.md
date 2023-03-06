@@ -141,6 +141,29 @@
 
 ## 實作3 - 建立 speech recognition bot
 
+> pip install pyaudio
+
+> pip install SpeechRecognition
+
+> pip install pydub
+
+- flac.exe
+
+    - 可能面臨到的錯誤訊息: Installing Flac command line tool on Windows
+    - 解決方法:
+    下載 flac.exe paste it inside C:\Windows\System32 this directory 或者專案目錄
+    可以試跑看看，如仍報錯，將 flac.exe 改成 flac 檔即可。
+    - 留意是否有 libFLAC.dll 檔案
+    - ref: https://stackoverflow.com/questions/65939571/installing-flac-command-line-tool-on-windows
+
+- 下載 ffmpeg，並將 bin 路徑(路徑放在哪裡都可以)添加到環境變數
+
+    - 解壓縮後，重開一個 cmd，輸入 ffmpeg --version，有訊息表示安裝成功
+    - ref:
+        - python库ffmpeg的错误解决方法：“Couldn‘t find ffmpeg or avconv - defaulting to ffmpeg, but may not work“: https://blog.csdn.net/qq_44921056/article/details/119615360
+        - https://ffmpeg.org/download.html#build-windows
+        - 最後使用的下載點: https://www.gyan.dev/ffmpeg/builds/ (下載-full_build.7z)
+
 <br>
 
 # 補充
