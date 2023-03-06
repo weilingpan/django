@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 
+import secret
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -21,14 +23,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-LINE_CHANNEL_ACCESS_TOKEN = 'x0q+N8Vpr6rkJuqKGYeE5wKiILntxSbJEG/xQ4VXsqo8XcCGi7zgwqhtankaXaun36km78wV5tyhShIz+3bzb56ApDH3IIqlpu+Eo34GwHPAdrysh1PL7v69zEN2ZH79oyKkavgNrLofdugKGVwTiQdB04t89/1O/w1cDnyilFU='
-LINE_CHANNEL_SECRET = '35973476d69ba8eb77f39eecc824afac'
+LINE_CHANNEL_ACCESS_TOKEN = secret.LINE_CHANNEL_ACCESS_TOKEN
+LINE_CHANNEL_SECRET = secret.LINE_CHANNEL_SECRET
 SECRET_KEY = "django-insecure-1y1d3o02_j57%+yy@6i&med&&#j+v#z#z!d3fhg_5p@*@*u-b0"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['4779-111-251-203-2.jp.ngrok.io']
+ALLOWED_HOSTS = ['8af9-111-251-235-77.jp.ngrok.io']
 
 
 # Application definition

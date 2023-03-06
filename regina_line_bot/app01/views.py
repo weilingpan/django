@@ -12,6 +12,8 @@ from linebot import LineBotApi, WebhookParser
 from linebot.exceptions import InvalidSignatureError, LineBotApiError
 from linebot.models import MessageEvent, TextSendMessage
 
+from app01.core import my_openai
+
 line_bot_api = LineBotApi(settings.LINE_CHANNEL_ACCESS_TOKEN)
 parser = WebhookParser(settings.LINE_CHANNEL_SECRET)
 
@@ -33,10 +35,18 @@ def callback(request):
             print(f'message info: {event}')
             event_type = event.message.type
             if event_type == 'text':
+                # if isinstance(event, MessageEvent):
+                #     line_bot_api.reply_message(
+                #         event.reply_token,
+                #         TextSendMessage(text=event.message.text)
+                #     )
                 if isinstance(event, MessageEvent):
+                    replay_text = my_openai.chat_with_chatgpt_using_gpt35(text=event.message.text)["choices"][0]["message"]["content"].strip()
+                    # replay_text = my_openai.chat_with_chatgpt_using_openai(text=event.message.text)["choices"][0]["text"].strip()
+                    # replay_text = my_openai.chat_with_chatgpt_using_requests(text=event.message.text).json()['choices'][0]['text']
                     line_bot_api.reply_message(
                         event.reply_token,
-                        TextSendMessage(text=event.message.text)
+                        TextSendMessage(text=replay_text)
                     )
             elif event_type == 'audio':
                 # Get the audio and save it to a file
