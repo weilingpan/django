@@ -3,7 +3,7 @@ import requests
 
 import secret
 
-openai.api_key = secret.openai_api_key
+openai.api_key = secret.openai_api_key #https://platform.openai.com/account/api-keys
 
 # list models
 models = openai.Model.list()
