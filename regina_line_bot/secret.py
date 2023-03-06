@@ -1,3 +1,0 @@
-openai_api_key = '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'
-LINE_CHANNEL_ACCESS_TOKEN = 'x0q+N8Vpr6rkJuqKGYeE5wKiILntxSbJEG/xQ4VXsqo8XcCGi7zgwqhtankaXaun36km78wV5tyhShIz+3bzb56ApDH3IIqlpu+Eo34GwHPAdrysh1PL7v69zEN2ZH79oyKkavgNrLofdugKGVwTiQdB04t89/1O/w1cDnyilFU='
-LINE_CHANNEL_SECRET = '35973476d69ba8eb77f39eecc824afac'
