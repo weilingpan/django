@@ -6,11 +6,7 @@ def trigger_task(request):
     queue = django_rq.get_queue('default')
     
     task_name = "my-first-task"
-    queue.enqueue('data_process.tasks.process', task_name, timeout=180, retry_intervals=[10, 20], max_retries=2)  
-    # 設定超時為 180 s
-    # 配置 RQ 的重試機制，確保在 job 失敗時適當重試，並設置最大重試次數。
-    # 第一次重試：如果 job 失敗，RQ 會在 10 秒後重試該 job。
-    # 第二次重試：如果第一次重試仍然失敗，RQ 會在 20 秒後再次重試。
+    queue.enqueue('data_process.tasks.process', task_name)
     return HttpResponse("Process task has been enqueued.")
 
 def check_default_task(request, rq_id):
