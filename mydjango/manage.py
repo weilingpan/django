@@ -22,4 +22,5 @@ if __name__ == "__main__":
     main()
 
 
-# python manage.py rqworker & python manage.py runserver
+# python manage.py rqworker -v 3 default low & python manage.py runserver
+# 錯誤排查：如果你發現 Job 狀態卡在 queued，檢查 Redis 是否正常運行，或確認隊列名稱是否一致。

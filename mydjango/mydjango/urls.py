@@ -17,12 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from data_process.views import trigger_task
+from data_process.views import trigger_task, check_default_task
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 
     path('django-rq/', include('django_rq.urls')),  # Django RQ dashboard
-    path('trigger/', trigger_task)
+    path('trigger/', trigger_task),
+    path('check_rq/<str:rq_id>', check_default_task)
 ]

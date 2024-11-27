@@ -136,7 +136,7 @@ RQ_QUEUES = {
         "DB": 0,
         "DEFAULT_TIMEOUT": 360,
     },
-    "task1": {
+    "low": {
         "HOST": "localhost",
         "PORT": 6379,
         "DB": 0,
