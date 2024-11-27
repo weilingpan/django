@@ -1,6 +1,7 @@
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 import django_rq
 from datetime import datetime
+import rq
 
 def trigger_task(request):
     queue = django_rq.get_queue('default')
@@ -12,6 +13,10 @@ def trigger_task(request):
 def check_default_task(request, rq_id):
     print(f"check rq_id: {rq_id} ...")
     try:
+        rq_job = rq.get_current_job()
+        print(f"here!!!!! {rq_job}")
+
+
         queue = django_rq.get_queue('default')
         rq_job = queue.fetch_job(rq_id)
 
@@ -35,3 +40,12 @@ def check_default_task(request, rq_id):
         return HttpResponseBadRequest(str(ex))
 
 # AbandonedJobError 是在使用 RQ (Redis Queue) 時出現的一個錯誤，通常是當某個工作（job）在隊列中被放置超過最大執行時間（timeout）或被放棄（abandoned）時，會拋出這個錯誤。
+
+def check_default_progress(request, rq_id):
+    queue = django_rq.get_queue('default')
+    rq_job = queue.fetch_job(rq_id)
+
+    # Fetch the progress from job's meta
+    progress = rq_job.meta.get('progress', None)
+    
+    return JsonResponse({'progress': progress})
