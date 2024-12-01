@@ -33,6 +33,42 @@ class CreateBookMutation(graphene.Mutation):
         book = Book.objects.create(title=title, content=content)
         return CreateBookMutation(book=book)
 
+
+class UpdateBookMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+        title = graphene.String()
+        content = graphene.String()
+
+    book = graphene.Field(BookType)
+
+    def mutate(self, info, id, title=None, content=None):
+        book = Book.objects.get(id=id)
+
+        if title:
+            book.title = title
+        if content:
+            book.content = content
+
+        book.save()
+        return UpdateBookMutation(book=book)
+
+class DeleteBookMutation(graphene.Mutation):
+    class Arguments:
+        id = graphene.Int(required=True)
+
+    success = graphene.Boolean()
+
+    def mutate(self, info, id):
+        try:
+            book = Book.objects.get(id=id)
+            book.delete()
+            return DeleteBookMutation(success=True)
+        except Book.DoesNotExist:
+            return DeleteBookMutation(success=False)
+        
 # 將 Mutation 加入到主 Query 類別中
 class Mutation(graphene.ObjectType):
     create_book = CreateBookMutation.Field()
+    update_book = UpdateBookMutation.Field()
+    delete_book = DeleteBookMutation.Field()
