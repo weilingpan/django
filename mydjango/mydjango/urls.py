@@ -17,7 +17,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+from graphene_django.views import GraphQLView
+
 from data_process.views import trigger_task, check_default_task, check_default_progress
+from data_process.views import add_book
 
 
 urlpatterns = [
@@ -26,5 +29,9 @@ urlpatterns = [
     path('django-rq/', include('django_rq.urls')),  # Django RQ dashboard
     path('trigger/', trigger_task),
     path('check_rq/<str:rq_id>', check_default_task),
-    path('check_rq_progress/<str:rq_id>', check_default_progress)
+    path('check_rq_progress/<str:rq_id>', check_default_progress),
+
+    path('graphql/', GraphQLView.as_view(graphiql=True)),
+    # http://localhost:8000/graphql/
+    path('add_book/', add_book),
 ]

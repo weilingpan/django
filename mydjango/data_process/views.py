@@ -3,6 +3,8 @@ import django_rq
 from datetime import datetime
 import rq
 
+from data_process.models import Book
+
 def trigger_task(request):
     queue = django_rq.get_queue('default')
     
@@ -49,3 +51,15 @@ def check_default_progress(request, rq_id):
     progress = rq_job.meta.get('progress', None)
     
     return JsonResponse({'progress': progress})
+
+def add_book(request):
+    book = Book.objects.create(
+        title='GraphQL與Django入門',
+        content='GraphQL是如何整合Django',
+    )
+
+    response_data = {
+        "title": book.title,
+        "content": book.content
+    }
+    return JsonResponse(response_data, status=201)
