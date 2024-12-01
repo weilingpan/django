@@ -21,6 +21,7 @@ from graphene_django.views import GraphQLView
 
 from data_process.views import trigger_task, check_default_task, check_default_progress
 from data_process.views import add_book
+from mydjango.schema import schema
 
 
 urlpatterns = [
@@ -31,7 +32,7 @@ urlpatterns = [
     path('check_rq/<str:rq_id>', check_default_task),
     path('check_rq_progress/<str:rq_id>', check_default_progress),
 
-    path('graphql/', GraphQLView.as_view(graphiql=True)),
+    path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
     # http://localhost:8000/graphql/
     path('add_book/', add_book),
 ]
