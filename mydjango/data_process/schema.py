@@ -11,10 +11,13 @@ class BookType(DjangoObjectType):
 
 
 class Query(graphene.ObjectType):
-    books = graphene.List(BookType, title=graphene.String())
+    books = graphene.List(BookType, title=graphene.String(), id=graphene.Int())
 
     def resolve_books(self, info, **kwargs):
+        id = kwargs.get('id')
         title = kwargs.get('title')
+        if id is not None:
+            return Book.objects.filter(id=id)
         if title is not None:
             return Book.objects.filter(title__contains=title)
         return Book.objects.all()
