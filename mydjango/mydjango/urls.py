@@ -34,5 +34,7 @@ urlpatterns = [
 
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
     # http://localhost:8000/graphql/
+    # 新增graphql統一入口
+    # 如果在 GraphQLView 中没有特别指定 schema 參數，會使用 settings.py 裡預設的 GRAPHENE
     path('add_book/', add_book),
 ]
