@@ -19,7 +19,10 @@ from django.urls import path, include
 
 from graphene_django.views import GraphQLView
 
-from data_process.views import trigger_task, check_default_task, check_default_progress
+from data_process.views import (
+    trigger_task, check_default_task, check_default_progress,
+    view_job_status, get_job_status
+)
 from data_process.views import add_book
 from mydjango.schema import schema
 
@@ -31,6 +34,8 @@ urlpatterns = [
     path('trigger/', trigger_task),
     path('check_rq/<str:rq_id>', check_default_task),
     path('check_rq_progress/<str:rq_id>', check_default_progress),
+    path('view_job_status', view_job_status),
+    path('get_job_status', get_job_status),
 
     path('graphql/', GraphQLView.as_view(graphiql=True, schema=schema)),
     # http://localhost:8000/graphql/
